@@ -17,6 +17,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  bool _isPasswordObscured = true;
+
 // login method
   void login() async {
     //showloading circle
@@ -88,11 +90,34 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomTextfield(
+                  TextField(
                     controller: _passwordController,
-                    hintText: "Password",
+                    decoration: InputDecoration(
+                      hintText: "Password",
+                      filled: true,
+                      fillColor: const Color(0xffE5E5E5),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: BorderSide.none,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: const BorderSide(color: Colors.black),
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isPasswordObscured
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isPasswordObscured = !_isPasswordObscured;
+                          });
+                        },
+                      ),
+                    ),
                   ),
-
                   //forgotten password
                   const SizedBox(height: 10),
                   const Align(
